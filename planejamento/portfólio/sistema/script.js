@@ -25,9 +25,14 @@ form.addEventListener('submit', function(event) {
 function atualizarLista() {
     listaLeads.innerHTML = '';
 
+    const produtoSelecionado = filtroProduto.value;
+
     leads.forEach(function(lead) {
-        const li = document.createElement('li');
-        li.textContent = `${lead.nome} - ${lead.whatsapp} - ${lead.produto}`;
-        listaLeads.appendChild(li);
+        if (produtoSelecionado === 'Todos' || lead.produto === produtoSelecionado) {
+            const li = document.createElement('li');
+            li.textContent = `${lead.nome} - ${lead.whatsapp} - ${lead.produto}`;
+            listaLeads.appendChild(li);
+        }
     });
 }
+
