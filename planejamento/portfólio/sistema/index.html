@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Leads - Loja de Suplementos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Cadastro de Leads</h1>
+
+    <form id="leadForm">
+        <label>Nome:</label>
+        <input type="text" id="nome" required>
+
+        <label>WhatsApp:</label>
+        <input type="text" id="whatsapp" required>
+
+        <label>Produto de Interesse:</label>
+        <select id="produto">
+            <option value="Whey Protein">Whey Protein</option>
+            <option value="Creatina">Creatina</option>
+            <option value="Pré-treino">Pré-treino</option>
+            <option value="Combo">Combo</option>
+        </select>
+
+        <button type="submit">Salvar Lead</button>
+    </form>
+
+    <h2>Leads Cadastrados</h2>
+    <ul id="listaLeads"></ul>
+
+    <script src="script.js"></script>
+</body>
+</html>
