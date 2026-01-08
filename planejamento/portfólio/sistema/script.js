@@ -1,5 +1,6 @@
 const form = document.getElementById('leadForm');
 const listaLeads = document.getElementById('listaLeads');
+const filtroProduto = document.getElementById('filtroProduto');
 
 let leads = [];
 
