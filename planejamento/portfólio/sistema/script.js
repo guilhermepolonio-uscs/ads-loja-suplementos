@@ -36,3 +36,7 @@ function atualizarLista() {
     });
 }
 
+filtroProduto.addEventListener('change', function() {
+    atualizarLista();
+});
+
