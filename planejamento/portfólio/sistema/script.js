@@ -28,16 +28,37 @@ function atualizarLista() {
 
     const produtoSelecionado = filtroProduto.value;
 
-    leads.forEach(function(lead) {
+    leads.forEach(function(lead, index) {
         if (produtoSelecionado === 'Todos' || lead.produto === produtoSelecionado) {
+
             const li = document.createElement('li');
-            li.textContent = `${lead.nome} - ${lead.whatsapp} - ${lead.produto}`;
+
+            const texto = document.createElement('span');
+            texto.textContent = `${lead.nome} - ${lead.whatsapp} - ${lead.produto}`;
+
+            const botaoExcluir = document.createElement('button');
+            botaoExcluir.textContent = 'Excluir';
+            botaoExcluir.style.marginLeft = '10px';
+
+            botaoExcluir.addEventListener('click', function () {
+                excluirLead(index);
+            });
+
+            li.appendChild(texto);
+            li.appendChild(botaoExcluir);
             listaLeads.appendChild(li);
         }
     });
 }
 
+
 filtroProduto.addEventListener('change', function() {
     atualizarLista();
 });
+
+function excluirLead(index) {
+    leads.splice(index, 1);
+    localStorage.setItem('leads', JSON.stringify(leads));
+    atualizarLista();
+}
 
