@@ -1,10 +1,12 @@
+// ===== Seleção de elementos =====
 const form = document.getElementById('leadForm');
 const listaLeads = document.getElementById('listaLeads');
 const filtroProduto = document.getElementById('filtroProduto');
 
+// ===== Estado da aplicação =====
 let leads = JSON.parse(localStorage.getItem('leads')) || [];
 
-
+// ===== Evento de submit =====
 form.addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -12,8 +14,19 @@ form.addEventListener('submit', function(event) {
     const whatsapp = document.getElementById('whatsapp').value;
     const produto = document.getElementById('produto').value;
 
-  function adicionarLead(nome, whatsapp, produto) {
+    adicionarLead(nome, whatsapp, produto);
+    form.reset();
+});
+
+// ===== Evento de filtro =====
+filtroProduto.addEventListener('change', function() {
+    atualizarLista();
+});
+
+// ===== Funções =====
+function adicionarLead(nome, whatsapp, produto) {
     const lead = {
+        id: Date.now(),
         nome,
         whatsapp,
         produto
@@ -24,13 +37,12 @@ form.addEventListener('submit', function(event) {
     atualizarLista();
 }
 
-
 function atualizarLista() {
     listaLeads.innerHTML = '';
 
     const produtoSelecionado = filtroProduto.value;
 
-    leads.forEach(function(lead, index) {
+    leads.forEach(function(lead) {
         if (produtoSelecionado === 'Todos' || lead.produto === produtoSelecionado) {
 
             const li = document.createElement('li');
@@ -43,7 +55,7 @@ function atualizarLista() {
             botaoExcluir.style.marginLeft = '10px';
 
             botaoExcluir.addEventListener('click', function () {
-                excluirLead(index);
+                excluirLead(lead.id);
             });
 
             li.appendChild(texto);
@@ -53,12 +65,14 @@ function atualizarLista() {
     });
 }
 
-filtroProduto.addEventListener('change', function() {
-    atualizarLista();
-});
+function excluirLead(id) {
+    leads = leads.filter(function(lead) {
+        return lead.id !== id;
+    });
 
-function excluirLead(index) {
-    leads.splice(index, 1);
     localStorage.setItem('leads', JSON.stringify(leads));
     atualizarLista();
 }
+
+// ===== Carregar lista ao abrir =====
+atualizarLista();
