@@ -1,0 +1,4 @@
+Campanhas:
+- Tráfego
+- Mensagens
+- Remarketing
