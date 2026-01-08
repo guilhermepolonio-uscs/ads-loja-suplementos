@@ -12,16 +12,18 @@ form.addEventListener('submit', function(event) {
     const whatsapp = document.getElementById('whatsapp').value;
     const produto = document.getElementById('produto').value;
 
+  function adicionarLead(nome, whatsapp, produto) {
     const lead = {
-        nome: nome,
-        whatsapp: whatsapp,
-        produto: produto
+        nome,
+        whatsapp,
+        produto
     };
 
     leads.push(lead);
+    localStorage.setItem('leads', JSON.stringify(leads));
     atualizarLista();
-    form.reset();
-});
+}
+
 
 function atualizarLista() {
     listaLeads.innerHTML = '';
@@ -51,7 +53,6 @@ function atualizarLista() {
     });
 }
 
-
 filtroProduto.addEventListener('change', function() {
     atualizarLista();
 });
@@ -61,4 +62,3 @@ function excluirLead(index) {
     localStorage.setItem('leads', JSON.stringify(leads));
     atualizarLista();
 }
-
