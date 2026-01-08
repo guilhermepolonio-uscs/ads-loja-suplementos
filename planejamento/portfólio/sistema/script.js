@@ -2,7 +2,8 @@ const form = document.getElementById('leadForm');
 const listaLeads = document.getElementById('listaLeads');
 const filtroProduto = document.getElementById('filtroProduto');
 
-let leads = [];
+let leads = JSON.parse(localStorage.getItem('leads')) || [];
+
 
 form.addEventListener('submit', function(event) {
     event.preventDefault();
